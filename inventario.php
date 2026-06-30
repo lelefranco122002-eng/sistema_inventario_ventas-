@@ -101,6 +101,22 @@ tr:hover {
 
 <div class="header">
     <h2>Catálogo de Inventario</h2>
+    <br>
+
+<a href="nuevo_producto.php"
+style="
+background:#3b82f6;
+color:white;
+padding:10px 20px;
+text-decoration:none;
+border-radius:5px;
+display:inline-block;
+margin-bottom:20px;
+">
+
++ Nuevo Producto
+
+</a>
 
     <div>
         <span>Usuario:
