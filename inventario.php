@@ -24,6 +24,30 @@ $resultado = $conn->query($sql);
 <title>Inventario - Sistema de Ventas</title>
 
 <style>
+    <head>
+    <meta charset="UTF-8">
+    <title>Inventario</title>
+
+    <style>
+
+    body{
+        font-family: Arial;
+        background:#f4f4f4;
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+    }
+
+    th,td{
+        border:1px solid #ccc;
+        padding:10px;
+    }
+
+    </style>
+
+</head>
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8fafc;
@@ -134,7 +158,8 @@ margin-bottom:20px;
     <th>Nombre del Producto</th>
     <th>Categoría</th>
     <th>Stock</th>
-    <th>Precio Unitario</th>
+    <th>Precio</th>
+    <th>Acciones</th>
 </tr>
 </thead>
 
@@ -149,13 +174,30 @@ if ($resultado->num_rows > 0) {
 ?>
 
 <tr>
-    <td><?php echo $fila['id']; ?></td>
-    <td><?php echo $fila['nombre_producto']; ?></td>
-    <td><?php echo $fila['nombre_categoria']; ?></td>
-    <td class="<?php echo $claseStock; ?>">
-        <?php echo $fila['stock']; ?> unds.
-    </td>
-    <td>$<?php echo number_format($fila['precio'], 2); ?></td>
+
+<td><?php echo $fila['id']; ?></td>
+
+<td><?php echo $fila['nombre_producto']; ?></td>
+
+<td><?php echo $fila['nombre_categoria']; ?></td>
+
+<td><?php echo $fila['stock']; ?></td>
+
+<td>$<?php echo number_format($fila['precio'],2); ?></td>
+
+<td>
+
+<a
+href="eliminar_producto.php?id=<?php echo $fila['id']; ?>"
+class="btn-eliminar"
+onclick="return confirm('¿Estás seguro de eliminar el producto <?php echo $fila['nombre_producto']; ?>?');">
+
+🗑️ Eliminar
+
+</a>
+
+</td>
+
 </tr>
 
 <?php
