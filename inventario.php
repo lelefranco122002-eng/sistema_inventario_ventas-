@@ -24,98 +24,91 @@ $resultado = $conn->query($sql);
 <title>Inventario - Sistema de Ventas</title>
 
 <style>
-    <head>
-    <meta charset="UTF-8">
-    <title>Inventario</title>
-
     <style>
 
-    body{
-        font-family: Arial;
-        background:#f4f4f4;
-    }
-
-    table{
-        width:100%;
-        border-collapse:collapse;
-    }
-
-    th,td{
-        border:1px solid #ccc;
-        padding:10px;
-    }
-
-    </style>
-
-</head>
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8fafc;
-    padding: 20px;
+body{
+    font-family: Arial;
+    background:#f4f4f4;
 }
 
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+table{
+    width:100%;
+    border-collapse:collapse;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #e2e8f0;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+th,td{
+    border:1px solid #ccc;
+    padding:10px;
 }
 
-h2 {
-    color: #0f172a;
-    margin: 0;
+/* AQUÍ VA EL NUEVO CÓDIGO */
+
+.btn-eliminar{
+
+    background:#ef4444;
+    color:white;
+    padding:6px 12px;
+    text-decoration:none;
+    border-radius:5px;
+    font-size:13px;
+    font-weight:bold;
+
+}
+.btn-editar{
+
+background:#f59e0b;
+color:white;
+padding:6px 12px;
+text-decoration:none;
+border-radius:4px;
+font-weight:bold;
+margin-right:5px;
+
 }
 
-.btn-salir {
-    background-color: #ef4444;
-    color: white;
-    text-decoration: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    font-weight: bold;
+.btn-editar:hover{
+
+background:#d97706;
+
 }
 
-.btn-salir:hover {
-    background-color: #dc2626;
+.btn-eliminar:hover{
+
+    background:#b91c1c;
+
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
+</style><style>
+
+body{
+    font-family: Arial;
 }
 
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #e2e8f0;
+table{
+    width:100%;
 }
 
-th {
-    background-color: #f1f5f9;
-    color: #334155;
-    font-weight: bold;
+th{
+    background:#2563eb;
+    color:white;
 }
 
-tr:hover {
-    background-color: #f8fafc;
+/* Agrega esto al final */
+
+.btn-eliminar{
+    background:#ef4444;
+    color:white;
+    padding:6px 12px;
+    text-decoration:none;
+    border-radius:4px;
+    font-size:13px;
+    font-weight:bold;
 }
 
-.stock-bajo {
-    color: #dc2626;
-    font-weight: bold;
+.btn-eliminar:hover{
+    background:#b91c1c;
 }
+
 </style>
 
 </head>
@@ -187,17 +180,17 @@ if ($resultado->num_rows > 0) {
 
 <td>
 
-<a
-href="eliminar_producto.php?id=<?php echo $fila['id']; ?>"
+<a href="editar_producto.php?id=<?php echo $fila['id']; ?>" class="btn-editar">
+✏️ Editar
+</a>
+
+<a href="eliminar_producto.php?id=<?php echo $fila['id']; ?>"
 class="btn-eliminar"
-onclick="return confirm('¿Estás seguro de eliminar el producto <?php echo $fila['nombre_producto']; ?>?');">
-
+onclick="return confirm('¿Seguro de eliminar este producto?');">
 🗑️ Eliminar
-
 </a>
 
 </td>
-
 </tr>
 
 <?php
