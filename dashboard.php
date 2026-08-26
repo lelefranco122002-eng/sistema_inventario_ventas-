@@ -1,31 +1,32 @@
-<?php
-session_start();
-
-// Validar que el usuario haya iniciado sesión
-if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php");
-    exit();
-}
-
-require_once "conexion.php";
-
-// MÉTRICA 1
-$res_total = $conn->query("SELECT COUNT(id) AS cantidad FROM productos");
-$fila_total = $res_total->fetch_assoc();
-$total_productos = $fila_total['cantidad'];
-
-// MÉTRICA 2
-$res_valor = $conn->query("SELECT SUM(precio * stock) AS capital FROM productos");
-$fila_valor = $res_valor->fetch_assoc();
-
-$capital_inventario = $fila_valor['capital'] ? $fila_valor['capital'] : 0;
-
-// MÉTRICA 3
-$res_caro = $conn->query("SELECT MAX(precio) AS max_precio FROM productos");
-$fila_caro = $res_caro->fetch_assoc();
-
-$precio_maximo = $fila_caro['max_precio'] ? $fila_caro['max_precio'] : 0;
+<?php 
+session_start(); 
+ 
+// Validar que el usuario haya iniciado sesión 
+if (!isset($_SESSION['user_id'])) { 
+    header("Location: index.php"); 
+    exit(); 
+} 
+ 
+require_once "conexion.php"; 
+ 
+// MÉTRICA 1 
+$res_total = $conn->query("SELECT COUNT(id) AS cantidad FROM productos"); 
+$fila_total = $res_total->fetch_assoc(); 
+$total_productos = $fila_total['cantidad']; 
+ 
+// MÉTRICA 2 
+$res_valor = $conn->query("SELECT SUM(precio * stock) AS capital FROM productos"); 
+$fila_valor = $res_valor->fetch_assoc(); 
+ 
+$capital_inventario = $fila_valor['capital'] ? $fila_valor['capital'] : 0; 
+ 
+// MÉTRICA 3 
+$res_caro = $conn->query("SELECT MAX(precio) AS max_precio FROM productos"); 
+$fila_caro = $res_caro->fetch_assoc(); 
+ 
+$precio_maximo = $fila_caro['max_precio'] ? $fila_caro['max_precio'] : 0; 
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -161,6 +162,7 @@ Cerrar Sesión
 
 </div>
 
+
 <div class="tarjetas-container">
 
 <div class="tarjeta">
@@ -175,6 +177,7 @@ Cerrar Sesión
 
 </div>
 
+
 <div class="tarjeta verde">
 
 <h3>Capital Inventario</h3>
@@ -186,6 +189,7 @@ $<?php echo number_format($capital_inventario,2); ?>
 </p>
 
 </div>
+
 
 <div class="tarjeta naranja">
 
@@ -201,18 +205,32 @@ $<?php echo number_format($precio_maximo,2); ?>
 
 </div>
 
+
 <h2>Módulos</h2>
 
 <div class="menu-modulos">
 
+<!-- MÓDULO DE INVENTARIO -->
 <a href="inventario.php" class="modulo">
 
 📦 Inventario
 
 </a>
 
-<a href="#"
-class="modulo"
+
+<!-- MÓDULO DE PROVEEDORES - NUEVO -->
+<a href="proveedores.php" 
+class="modulo" 
+style="background:#8b5cf6;">
+
+🚚 Módulo de Proveedores
+
+</a>
+
+
+<!-- PUNTO DE VENTA -->
+<a href="#" 
+class="modulo" 
 style="background:#64748b;">
 
 🛒 Punto de Venta
@@ -223,4 +241,5 @@ style="background:#64748b;">
 </div>
 
 </body>
+
 </html>
