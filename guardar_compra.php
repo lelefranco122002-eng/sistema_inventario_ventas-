@@ -87,6 +87,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt2->execute();
 
         $stmt2->close();
+        // =========================================================
+// FASE 3: ACTUALIZAR EL INVENTARIO FÍSICO
+// =========================================================
+
+// Le ordenamos a MySQL que sume la cantidad comprada
+// al stock actual del producto.
+
+$sql_stock = "UPDATE productos SET stock = stock + ? WHERE id = ?";
+
+$stmt3 = $conn->prepare($sql_stock);
+
+// Enviamos:
+// 1. La cantidad comprada
+// 2. El ID del producto
+
+$stmt3->bind_param("ii", $cantidad, $producto_id);
+
+$stmt3->execute();
+
+$stmt3->close();
 
 
         // =========================================================
