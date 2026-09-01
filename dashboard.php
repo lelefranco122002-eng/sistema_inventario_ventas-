@@ -1,30 +1,31 @@
-<?php 
-session_start(); 
- 
-// Validar que el usuario haya iniciado sesión 
-if (!isset($_SESSION['user_id'])) { 
-    header("Location: index.php"); 
-    exit(); 
-} 
- 
-require_once "conexion.php"; 
- 
-// MÉTRICA 1 
-$res_total = $conn->query("SELECT COUNT(id) AS cantidad FROM productos"); 
-$fila_total = $res_total->fetch_assoc(); 
-$total_productos = $fila_total['cantidad']; 
- 
-// MÉTRICA 2 
-$res_valor = $conn->query("SELECT SUM(precio * stock) AS capital FROM productos"); 
-$fila_valor = $res_valor->fetch_assoc(); 
- 
-$capital_inventario = $fila_valor['capital'] ? $fila_valor['capital'] : 0; 
- 
-// MÉTRICA 3 
-$res_caro = $conn->query("SELECT MAX(precio) AS max_precio FROM productos"); 
-$fila_caro = $res_caro->fetch_assoc(); 
- 
-$precio_maximo = $fila_caro['max_precio'] ? $fila_caro['max_precio'] : 0; 
+```php
+<?php
+session_start();
+
+// Validar que el usuario haya iniciado sesión
+if (!isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit();
+}
+
+require_once "conexion.php";
+
+// MÉTRICA 1
+$res_total = $conn->query("SELECT COUNT(id) AS cantidad FROM productos");
+$fila_total = $res_total->fetch_assoc();
+$total_productos = $fila_total['cantidad'];
+
+// MÉTRICA 2
+$res_valor = $conn->query("SELECT SUM(precio * stock) AS capital FROM productos");
+$fila_valor = $res_valor->fetch_assoc();
+
+$capital_inventario = $fila_valor['capital'] ? $fila_valor['capital'] : 0;
+
+// MÉTRICA 3
+$res_caro = $conn->query("SELECT MAX(precio) AS max_precio FROM productos");
+$fila_caro = $res_caro->fetch_assoc();
+
+$precio_maximo = $fila_caro['max_precio'] ? $fila_caro['max_precio'] : 0;
 ?>
 
 <!DOCTYPE html>
@@ -116,12 +117,14 @@ font-weight:bold;
 
 display:flex;
 gap:20px;
+flex-wrap:wrap;
 
 }
 
 .modulo{
 
 flex:1;
+min-width:220px;
 background:#3b82f6;
 color:white;
 padding:20px;
@@ -130,6 +133,7 @@ text-align:center;
 border-radius:8px;
 font-size:18px;
 font-weight:bold;
+box-sizing:border-box;
 
 }
 
@@ -144,6 +148,7 @@ background:#2563eb;
 </head>
 
 <body>
+
 
 <div class="navbar">
 
@@ -164,6 +169,7 @@ Cerrar Sesión
 
 
 <div class="tarjetas-container">
+
 
 <div class="tarjeta">
 
@@ -203,14 +209,18 @@ $<?php echo number_format($precio_maximo,2); ?>
 
 </div>
 
+
 </div>
 
 
 <h2>Módulos</h2>
 
+
 <div class="menu-modulos">
 
+
 <!-- MÓDULO DE INVENTARIO -->
+
 <a href="inventario.php" class="modulo">
 
 📦 Inventario
@@ -218,9 +228,10 @@ $<?php echo number_format($precio_maximo,2); ?>
 </a>
 
 
-<!-- MÓDULO DE PROVEEDORES - NUEVO -->
-<a href="proveedores.php" 
-class="modulo" 
+<!-- MÓDULO DE PROVEEDORES -->
+
+<a href="proveedores.php"
+class="modulo"
 style="background:#8b5cf6;">
 
 🚚 Módulo de Proveedores
@@ -228,9 +239,21 @@ style="background:#8b5cf6;">
 </a>
 
 
+<!-- MÓDULO DE COMPRAS - GUÍA 24 -->
+
+<a href="nueva_compra.php"
+class="modulo"
+style="background:#10b981;">
+
+📥 Registrar Ingreso de Mercadería
+
+</a>
+
+
 <!-- PUNTO DE VENTA -->
-<a href="#" 
-class="modulo" 
+
+<a href="#"
+class="modulo"
 style="background:#64748b;">
 
 🛒 Punto de Venta
@@ -238,8 +261,11 @@ style="background:#64748b;">
 
 </a>
 
+
 </div>
+
 
 </body>
 
 </html>
+```
