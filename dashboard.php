@@ -250,6 +250,17 @@ style="background:#10b981;">
 </a>
 
 
+<!-- HISTORIAL DE COMPRAS - GUÍA 26 -->
+
+<a href="historial_compras.php"
+class="modulo"
+style="background:#0ea5e9;">
+
+📋 Historial de Compras
+
+</a>
+
+
 <!-- PUNTO DE VENTA -->
 
 <a href="#"
